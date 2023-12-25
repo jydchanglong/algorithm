@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function moveZero(arr) {
+        if (arr.length === 0) return arr;
+
+        let i;
+        let j = -1;
+
+        for (i = 0; i < arr.length; i++) {
+          // 找到第一个 0
+          if (arr[i] === 0) {
+            if (j < 0) {
+              j = i;
+            }
+          }
+
+          if (arr[i] !== 0 && j >= 0) {
+            // 交换
+            const n = arr[i];
+            arr[i] = arr[j];
+            arr[j] = n;
+
+            j++;
+          }
+        }
+      }
+
+      const arr = [0, 1, 0, 3, 12];
+      moveZero(arr);
+      console.log(arr);
+
+      function moveZero2(arr) {
+        if (arr.length === 0) return arr;
+
+        let i = 0;
+        let j = arr.length - 1;
+
+        while (i < j) {
+          if (arr[i] === 0 && arr[j] !== 0) {
+            const n = arr[i];
+            arr[i] = arr[j];
+            arr[j] = n;
+
+            i++;
+            j--;
+          } else if (arr[i] !== 0 && arr[j] !== 0) {
+            i++;
+          } else if (arr[i] === 0 && arr[j] === 0) {
+            j--;
+          } else {
+            i++;
+            j--;
+          }
+        }
+      }
+
+      const arr2 = [0, 1, 0, 3, 12];
+      moveZero2(arr2);
+      console.log(arr2);
+
+      let arr1 = [];
+      for (let i = 0; i < 20 * 10000; i++) {
+        if (i % 10 === 0) {
+          arr1.push(0);
+        } else {
+          arr1.push(i);
+        }
+      }
+      console.time("moveZero");
+      moveZero(arr1);
+      console.timeEnd("moveZero");
+
+      let arr3 = [];
+      for (let i = 0; i < 20 * 10000; i++) {
+        if (i % 10 === 0) {
+          arr3.push(0);
+        } else {
+          arr3.push(i);
+        }
+      }
+      console.time("moveZero2");
+      moveZero2(arr3);
+      console.timeEnd("moveZero2");
+    </script>
+  </body>
+</html>

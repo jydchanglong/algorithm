@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // splice
+      function quickSort1(arr) {
+        let len = arr.length;
+        if (len === 0) return arr;
+
+        const midIndex = Math.floor(len / 2);
+        const midValue = arr.splice(midIndex, 1)[0];
+
+        let left = [];
+        let right = [];
+
+        // 这里的 length 要重新计算
+        for (let i = 0; i < arr.length; i++) {
+          const n = arr[i];
+          if (n < midValue) {
+            left.push(n);
+          } else {
+            right.push(n);
+          }
+        }
+
+        return quickSort1(left).concat([midValue], quickSort1(right));
+      }
+
+      const arr = [1, 3, 2, 5, 4, 6, 7, 9, 8];
+      console.log(quickSort1(arr));
+
+      function quickSort2(arr) {
+        let len = arr.length;
+        if (len === 0) return arr;
+
+        const midIndex = Math.floor(len / 2);
+        const midValue = arr.slice(midIndex, midIndex + 1)[0];
+
+        let left = [];
+        let right = [];
+
+        // 这里的 length 要重新计算
+        for (let i = 0; i < arr.length; i++) {
+          const n = arr[i];
+          if (i !== midIndex) {
+            if (n < midValue) {
+              left.push(n);
+            } else {
+              right.push(n);
+            }
+          }
+        }
+
+        return quickSort2(left).concat([midValue], quickSort2(right));
+      }
+      const arr2 = [1, 3, 2, 5, 4, 6, 7, 9, 8];
+      console.log(quickSort2(arr2));
+
+      let arr3 = [];
+      for (let i = 0; i < 10 * 10000; i++) {
+        arr3.push(Math.floor(Math.random() * 10000));
+      }
+      console.time("quickSort1");
+      quickSort1(arr3);
+      console.timeEnd("quickSort1");
+      let arr4 = [];
+      for (let i = 0; i < 10 * 10000; i++) {
+        arr4.push(Math.floor(Math.random() * 10000));
+      }
+      console.time("quickSort2");
+      quickSort2(arr4);
+      console.timeEnd("quickSort2");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class MyQueue {
+        head = null;
+        tail = null;
+        len = 0;
+
+        add(num) {
+          const newNode = {
+            value: num,
+            next: null,
+          };
+
+          if (this.head == null) {
+            this.head = newNode;
+          }
+
+          if (this.tail) {
+            const tailNode = this.tail;
+            tailNode.next = newNode;
+          }
+          this.tail = newNode;
+
+          this.len++;
+        }
+
+        delete() {
+          const headNode = this.head;
+          if (headNode == null) {
+            return null;
+          }
+          if (this.len <= 0) {
+            return null;
+          }
+          const value = headNode.value;
+          this.head = headNode.next;
+          this.len--;
+          return value;
+        }
+
+        get length() {
+          return this.len;
+        }
+      }
+
+      const queue = new MyQueue();
+      queue.add(1);
+      queue.add(2);
+      queue.add(3);
+      queue.add(4);
+      queue.add(5);
+      console.log("length: ", queue.length);
+      const value1 = queue.delete();
+      console.log("length: ", value1, queue.length);
+      const value2 = queue.delete();
+      console.log("length: ", value2, queue.length);
+      const value3 = queue.delete();
+      console.log("length: ", value3, queue.length);
+      const value4 = queue.delete();
+      console.log("length: ", value4, queue.length);
+      const value5 = queue.delete();
+      console.log("length: ", value5, queue.length);
+    </script>
+  </body>
+</html>
