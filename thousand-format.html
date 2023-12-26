@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function format1(n) {
+        n = Math.floor(n);
+        const s = n.toString();
+        const arr = s.split("").reverse();
+
+        return arr.reduce((prev, value, index) => {
+          if (index % 3 === 0) {
+            if (prev) {
+              return value + "," + prev;
+            } else {
+              return value;
+            }
+          } else {
+            return value + prev;
+          }
+        }, "");
+      }
+
+      const n = "123456789";
+      console.log(format1(n));
+
+      function format2(n) {
+        const s = n.toString();
+        const len = s.length;
+        let res = "";
+
+        for (let i = len - 1; i >= 0; i--) {
+          let j = len - i;
+          if (j % 3 === 0 && i !== 0) {
+            res = "," + s[i] + res;
+          } else {
+            res = s[i] + res;
+          }
+        }
+
+        return res;
+      }
+      const n2 = 123456789;
+      console.log(format2(n2));
+    </script>
+  </body>
+</html>

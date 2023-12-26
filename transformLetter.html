@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function transLetter1(s) {
+        let res = "";
+        if (s.length === 0) {
+          return res;
+        }
+        const reg1 = /[a-z]/;
+        const reg2 = /[A-Z]/;
+
+        for (let i = 0; i < s.length; i++) {
+          if (reg1.test(s[i])) {
+            res += s[i].toUpperCase();
+          } else if (reg2.test(s[i])) {
+            res += s[i].toLowerCase();
+          } else {
+            res += res[i];
+          }
+        }
+
+        return res;
+      }
+      const s = "aBcD";
+      console.log(transLetter1(s));
+
+      // ASCII码
+      function transLetter2(s) {
+        let res = "";
+
+        for (let i = 0; i < s.length; i++) {
+          const str = s[i];
+          const code = str.charCodeAt(0);
+
+          if (code >= 65 && code <= 90) {
+            res += str.toLowerCase();
+          } else if (code >= 97 && code <= 122) {
+            res += str.toUpperCase();
+          } else {
+            res += str;
+          }
+        }
+
+        return res;
+      }
+      console.log(transLetter2(s));
+    </script>
+  </body>
+</html>
